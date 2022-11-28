@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  #service 1: definition of mongo database
+  mongo_db:
+    image: mongo
+    container_name: mongoDB
+    restart: always
+    ports:
+      - 27017:27017
+
+
+  #service 2: definition of your spring-boot app
+  productservice:                        #it is just a name, which will be used only in this file.
+    image: review-service               #name of the image after Dockerfile executes
+    container_name: review-service-app  #name of the container created from docker image
+    build:
+      context: src/main/java                          #docker file path (. means root directory)
+      dockerfile: src/main/resources/Dockerfile             #docker file name
+    ports:
+      - "9090:9090"                       #docker containter port with your os port
+    restart: always
+    depends_on:                           #define dependencies of this app
+      - mongo_db                                #dependency name (which is defined with this name 'db' in this file earlier)

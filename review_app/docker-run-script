@@ -1,0 +1,2 @@
+docker run --name containermongodb -d -p 27017:27017 mongo
+docker exec -it containermongodb mongosh
