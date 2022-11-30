@@ -17,12 +17,4 @@ public class ReviewApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReviewApplication.class, args);
 	}
-
-	@Bean
-	InitializingBean sendDatabase() {
-		return () -> {
-			reviewRepository.save(new Review("TEST REVIEW 1"));
-			reviewRepository.save(new Review("TEST REVIEW 2"));
-		};
-	}
 }
