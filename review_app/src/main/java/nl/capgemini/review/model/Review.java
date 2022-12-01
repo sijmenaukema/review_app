@@ -18,18 +18,41 @@ public class Review {
     @NotNull(message = "text is required")
     private String text;
 
-    public ObjectId getId() { return id; }
-    public Integer getRating(){ return rating; }
-    public String getText(){ return text; }
-    public void setText(String text){
+    private String ArtistName;
+
+    private String musicSetName;
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
         this.text = text;
     }
-    public void setRating(Integer rating) { this.rating = rating; }
 
-    public Review(){};
+    public String getArtistName() {
+        return ArtistName;
+    }
 
-    public Review(String text, Integer rating){
-        this.text = text;
+    public String getMusicSetName() {
+        return musicSetName;
+    }
+
+    public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Review() {
+    }
+
+    public Review(Integer rating, String text, String artistName, String musicSetName) {
+        this.rating = rating;
+        this.text = text;
+        ArtistName = artistName;
+        this.musicSetName = musicSetName;
     }
 }

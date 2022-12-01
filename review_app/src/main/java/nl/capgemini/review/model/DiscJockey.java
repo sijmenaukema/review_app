@@ -10,6 +10,13 @@ public class DiscJockey {
     @JsonProperty("name")
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public DiscJockey() {
+    }
+
     private DiscJockey(long id, String name, String genre){
         this.id = id;
         this.name = name;
