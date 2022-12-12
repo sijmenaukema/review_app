@@ -22,6 +22,16 @@ public class Review {
 
     private String musicSetName;
 
+    private long musicSetId;
+
+    public long getMusicSetId() {
+        return musicSetId;
+    }
+
+    public void setMusicSetId(long musicSetId) {
+        this.musicSetId = musicSetId;
+    }
+
     public Integer getRating() {
         return rating;
     }
@@ -45,14 +55,13 @@ public class Review {
     public void setRating(Integer rating) {
         this.rating = rating;
     }
+    public Review() {}
 
-    public Review() {
-    }
-
-    public Review(Integer rating, String text, String artistName, String musicSetName) {
+    public Review(Integer rating, String text, String artistName, String musicSetName, long musicSetId) {
         this.rating = rating;
         this.text = text;
         ArtistName = artistName;
         this.musicSetName = musicSetName;
+        this.musicSetId = musicSetId;
     }
 }

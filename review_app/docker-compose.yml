@@ -22,3 +22,5 @@ services:
     restart: always
     depends_on:                           #define dependencies of this app
       - mongo_db                                #dependency name (which is defined with this name 'db' in this file earlier)
+    environment:
+      - 

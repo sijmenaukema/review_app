@@ -1,7 +1,5 @@
 package nl.capgemini.review.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class MusicSet {
 
     private long id;

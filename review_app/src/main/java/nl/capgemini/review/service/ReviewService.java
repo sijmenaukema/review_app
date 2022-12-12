@@ -4,20 +4,14 @@ import nl.capgemini.review.model.DiscJockey;
 import nl.capgemini.review.model.MusicSet;
 import nl.capgemini.review.model.Review;
 import nl.capgemini.review.repository.ReviewRepository;
-
-import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -33,11 +27,19 @@ public class ReviewService {
         return reviewArrayList;
     }
 
+    public List<Review> getReviews(String musicSetId){
+        Optional<Review[]> optional = reviewRepository.getReviewByMusicSetId(musicSetId);
+        if (optional.isPresent()){
+            return Arrays.stream(optional.get()).toList();
+        }
+        return null;
+    }
+
     public Review postNewReview(String text, int rating, String musicSetId){
         MusicSet musicSet = getMusicSet(musicSetId);
         if(musicSet != null) {
             DiscJockey discJockey = musicSet.getDiscJockey();
-            Review review = new Review(rating, text, discJockey.getName(), musicSet.getTitle());
+            Review review = new Review(rating, text, discJockey.getName(), musicSet.getTitle(), musicSet.getId());
             reviewRepository.save(review);
             return review;
         }
@@ -45,17 +47,12 @@ public class ReviewService {
     }
 
     private static MusicSet getMusicSet(String musicSetId) {
-        final String uri = "http://localhost:9090/musicset/id";
-        String requestBody = "{ \"id\":" + musicSetId + "}";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        final String uri = String.format("http://localhost:9090/musicset/%s", musicSetId);
         RestTemplate restTemplate = new RestTemplate();
-//        HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
-        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<MusicSet> response = restTemplate.postForEntity(uri, request, MusicSet.class);
+        ResponseEntity<MusicSet> response = restTemplate.getForEntity(uri, MusicSet.class);
         if(response.getStatusCode().is2xxSuccessful()) {
             return response.getBody();
-        }else {
+        } else {
             return null;
         }
     }
