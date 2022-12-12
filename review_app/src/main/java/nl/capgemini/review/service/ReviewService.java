@@ -27,7 +27,8 @@ public class ReviewService {
         return reviewArrayList;
     }
 
-    public List<Review> getReviews(String musicSetId){
+    public List<Review> getReviews(int musicSetId){
+//        Optional<Review[]> optional = reviewRepository.getReviewByMusicSetId(musicSetId);
         Optional<Review[]> optional = reviewRepository.getReviewByMusicSetId(musicSetId);
         if (optional.isPresent()){
             return Arrays.stream(optional.get()).toList();

@@ -47,10 +47,10 @@ public class Review {
     public String getArtistName() {
         return ArtistName;
     }
-
     public String getMusicSetName() {
         return musicSetName;
     }
+    public ObjectId getObjectId() { return id; }
 
     public void setRating(Integer rating) {
         this.rating = rating;

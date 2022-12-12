@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/review")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ReviewController {
 
     final ReviewService reviewService;
@@ -27,15 +28,23 @@ public class ReviewController {
             return ResponseEntity.ok().body(reviewList);
         }
     }
-
-    @GetMapping("/musicsetname/{musicSetId}")
-    protected ResponseEntity<List<Review>> getReviewsForMusicSet(@PathVariable String musicSetId) {
+    @GetMapping("/{musicSetId}")
+    protected ResponseEntity<List<Review>> getReviewsForSet(@PathVariable int musicSetId) {
         List<Review> reviewList = reviewService.getReviews(musicSetId);
         if (reviewList.isEmpty()) return ResponseEntity.notFound().build();
         else {
             return ResponseEntity.ok().body(reviewList);
         }
     }
+
+//    @GetMapping("/musicsetname/{musicSetId}")
+//    protected ResponseEntity<List<Review>> getReviewsForMusicSet(@PathVariable String musicSetId) {
+//        List<Review> reviewList = reviewService.getReviews(musicSetId);
+//        if (reviewList.isEmpty()) return ResponseEntity.notFound().build();
+//        else {
+//            return ResponseEntity.ok().body(reviewList);
+//        }
+//    }
 
 //    @PostMapping("/")
 //    protected ResponseEntity<Review> postReview(@RequestBody String text, int rating, long musicSetId) {

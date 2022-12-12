@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.Optional;
 
 public interface ReviewRepository extends MongoRepository<Review, Long> {
-    @Query("{musicSetName:?0}")
-    Optional<Review[]> getReviewByMusicSetId(String musicSetName);
+    @Query("{musicSetId:?0}")
+    Optional<Review[]> getReviewByMusicSetId(int musicSetId);
 }
