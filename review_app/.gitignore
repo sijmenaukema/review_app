@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### other projects in the same directory ###
+/.idea/
+/target/
+/data/*.db
+../*
