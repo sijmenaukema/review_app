@@ -48,7 +48,7 @@ public class ReviewService {
     }
 
     private static MusicSet getMusicSet(String musicSetId) {
-        final String uri = String.format("http://localhost:9090/musicset/%s", musicSetId);
+        final String uri = String.format("http://festival-app:9090/musicset/%s", musicSetId);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<MusicSet> response = restTemplate.getForEntity(uri, MusicSet.class);
         if(response.getStatusCode().is2xxSuccessful()) {
