@@ -28,12 +28,8 @@ public class ReviewService {
     }
 
     public List<Review> getReviews(int musicSetId){
-//        Optional<Review[]> optional = reviewRepository.getReviewByMusicSetId(musicSetId);
         Optional<Review[]> optional = reviewRepository.getReviewByMusicSetId(musicSetId);
-        if (optional.isPresent()){
-            return Arrays.stream(optional.get()).toList();
-        }
-        return null;
+        return optional.map(reviews -> Arrays.stream(reviews).toList()).orElse(null);
     }
 
     public Review postNewReview(String text, int rating, String musicSetId){
@@ -58,4 +54,3 @@ public class ReviewService {
         }
     }
 }
-
